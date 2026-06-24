@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday My Love!</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600;700&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: 'Poppins', 'Noto Sans Devanagari', sans-serif;
+    background: linear-gradient(135deg, #1a0a2e 0%, #4a1a6b 50%, #ff6b9d 100%);
+    min-height: 100vh; overflow-x: hidden; color: white;
+}
+.heart {
+    position: fixed; font-size: 20px; animation: floatUp 4s linear infinite;
+    opacity: 0.6; pointer-events: none; z-index: 0;
+}
+@keyframes floatUp {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.6; } 90% { opacity: 0.6; }
+    100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+}
+.container {
+    max-width: 600px; margin: 0 auto; padding: 20px; position: relative;
+    z-index: 1; min-height: 100vh; display: flex; flex-direction: column;
+    align-items: center;
+}
+.step { display: none; width: 100%; text-align: center; animation: fadeIn 0.8s ease; }
+.step.active { display: block; }
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.title {
+    font-family: 'Dancing Script', cursive; font-size: 2.5rem; color: #ffd700;
+    text-shadow: 2px 2px 10px rgba(255, 215, 0, 0.5); margin-bottom: 20px;
+}
+.shayari-box {
+    background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 20px;
+    padding: 25px; margin: 20px 0; border: 1px solid rgba(255,255,255,0.2);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+.shayari-text { font-size: 1.1rem; line-height: 1.8; color: #ffe4e1; font-style: italic; }
+.shayari-text.hindi { font-family: 'Noto Sans Devanagari', sans-serif; font-size: 1.2rem; }
+.btn {
+    background: linear-gradient(45deg, #ff6b9d, #c44569); color: white; border: none;
+    padding: 15px 40px; font-size: 1.1rem; border-radius: 50px; cursor: pointer;
+    margin: 15px 10px; transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255,107,157,0.4); font-family: 'Poppins', sans-serif; font-weight: 600;
+}
+.btn:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 6px 25px rgba(255,107,157,0.6); }
+.btn-green { background: linear-gradient(45deg, #00b894, #00cec9); box-shadow: 0 4px 15px rgba(0,184,148,0.4); }
+.btn-gold { background: linear-gradient(45deg, #f39c12, #e74c3c); box-shadow: 0 4px 15px rgba(243,156,18,0.4); }
+.balloon-container { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin: 30px 0; }
+.balloon {
+    width: 80px; height: 100px; border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    cursor: pointer; transition: all 0.3s ease; position: relative;
+    animation: floatBalloon 2s ease-in-out infinite; display: flex; align-items: center;
+    justify-content: center; font-size: 1.5rem; box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+}
+.balloon::after { content: ''; position: absolute; bottom: -20px; left: 50%; width: 2px; height: 20px; background: white; transform: translateX(-50%); }
+.balloon.popped { animation: pop 0.3s ease forwards; }
+@keyframes pop { 0% { transform: scale(1); } 50% { transform: scale(1.3); } 100% { transform: scale(0); opacity: 0; } }
+@keyframes floatBalloon { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+.balloon-red { background: linear-gradient(135deg, #ff6b6b, #ee5a5a); }
+.balloon-pink { background: linear-gradient(135deg, #ff9ff3, #f368e0); }
+.balloon-gold { background: linear-gradient(135deg, #f9ca24, #f0932b); }
+.balloon-purple { background: linear-gradient(135deg, #a29bfe, #6c5ce7); }
+.balloon-blue { background: linear-gradient(135deg, #74b9ff, #0984e3); }
+.scratch-container { position: relative; width: 300px; height: 150px; margin: 20px auto; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 20px rgba(0,0,0,0.3); }
+.scratch-reveal { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(45deg, #ff6b9d, #c44569); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: bold; z-index: 2; padding: 15px; text-align: center; }
+.scratch-hidden { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(45deg, #2d3436, #636e72); display: flex; align-items: center; justify-content: center; font-size: 1rem; color: #b2bec3; z-index: 3; cursor: pointer; transition: opacity 0.5s; }
+.scratch-hidden.scratched { opacity: 0; pointer-events: none; }
+.puzzle-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; max-width: 300px; margin: 20px auto; }
+.puzzle-piece { aspect-ratio: 1; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; cursor: pointer; transition: all 0.3s ease; border: 2px solid rgba(255,255,255,0.3); }
+.puzzle-piece:hover { transform: scale(1.05); }
+.puzzle-piece.revealed { background: linear-gradient(135deg, #f093fb, #f5576c); animation: pulse 0.5s ease; }
+@keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+.memory-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; max-width: 320px; margin: 20px auto; }
+.memory-card { aspect-ratio: 1; background: linear-gradient(135deg, #fa709a, #fee140); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; cursor: pointer; transition: all 0.4s ease; }
+.memory-card.flipped { background: linear-gradient(135deg, #a8edea, #fed6e3); }
+.memory-card.matched { background: linear-gradient(135deg, #d4fc79, #96e6a1); animation: matchAnim 0.5s ease; }
+@keyframes matchAnim { 0% { transform: scale(1); } 50% { transform: scale(1.2); } 100% { transform: scale(1); } }
+.cake-container { position: relative; width: 250px; height: 200px; margin: 20px auto; }
+.cake { width: 200px; height: 120px; background: linear-gradient(180deg, #d4a574 0%, #8b6914 100%); border-radius: 10px 10px 20px 20px; margin: 0 auto; position: relative; top: 60px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+.cake::before { content: ''; position: absolute; top: -10px; left: 10px; right: 10px; height: 20px; background: linear-gradient(180deg, #ff69b4, #ff1493); border-radius: 10px; }
+.candle { position: absolute; width: 12px; height: 40px; background: linear-gradient(180deg, #fff, #ddd); border-radius: 3px; top: 20px; cursor: pointer; }
+.candle::after { content: ''; position: absolute; top: -15px; left: 50%; transform: translateX(-50%); width: 8px; height: 15px; background: radial-gradient(ellipse at center, #ffff00 0%, #ff6600 70%, transparent 100%); border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; animation: flicker 0.5s ease-in-out infinite alternate; }
+.candle.blown::after { display: none; }
+@keyframes flicker { 0% { transform: translateX(-50%) scale(1); } 100% { transform: translateX(-50%) scale(1.1) rotate(5deg); } }
+.candle1 { left: 60px; } .candle2 { left: 120px; } .candle3 { left: 180px; }
+.progress-container { width: 100%; max-width: 400px; margin: 20px auto; background: rgba(255,255,255,0.1); border-radius: 20px; padding: 5px; }
+.progress-bar { height: 10px; background: linear-gradient(90deg, #ff6b9d, #ffd700); border-radius: 10px; transition: width 0.5s ease; width: 0%; }
+.step-counter { font-size: 0.9rem; color: #ffd700; margin-top: 5px; }
+.grand-title { font-family: 'Dancing Script', cursive; font-size: 3rem; color: #ffd700; text-shadow: 0 0 20px rgba(255,215,0,0.8); animation: glow 2s ease-in-out infinite alternate; }
+@keyframes glow { from { text-shadow: 0 0 20px rgba(255,215,0,0.8); } to { text-shadow: 0 0 40px rgba(255,215,0,1), 0 0 60px rgba(255,107,157,0.8); } }
+.confetti { position: fixed; width: 10px; height: 10px; top: -10px; animation: confettiFall 3s linear forwards; pointer-events: none; z-index: 100; }
+@keyframes confettiFall { 0% { transform: translateY(0) rotate(0deg); opacity: 1; } 100% { transform: translateY(100vh) rotate(720deg); opacity: 0; } }
+@media (max-width: 480px) { .title { font-size: 1.8rem; } .grand-title { font-size: 2rem; } .balloon { width: 60px; height: 80px; } .shayari-text { font-size: 0.95rem; } }
+.wheel-container { position: relative; width: 280px; height: 280px; margin: 20px auto; }
+.wheel { width: 100%; height: 100%; border-radius: 50%; background: conic-gradient(#ff6b6b 0deg 60deg, #feca57 60deg 120deg, #48dbfb 120deg 180deg, #ff9ff3 180deg 240deg, #54a0ff 240deg 300deg, #5f27cd 300deg 360deg); position: relative; transition: transform 3s cubic-bezier(0.17, 0.67, 0.12, 0.99); box-shadow: 0 0 30px rgba(0,0,0,0.5); }
+.wheel-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 50px; height: 50px; background: #ffd700; border-radius: 50%; z-index: 2; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; box-shadow: 0 0 20px rgba(255,215,0,0.8); }
+.wheel-pointer { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 15px solid transparent; border-right: 15px solid transparent; border-top: 30px solid #ffd700; z-index: 3; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.3)); }
+.gift-box { width: 150px; height: 150px; margin: 20px auto; position: relative; cursor: pointer; transition: transform 0.3s; }
+.gift-box:hover { transform: scale(1.05); }
+.gift-box.opened .gift-lid { animation: openLid 0.5s ease forwards; }
+.gift-lid { width: 160px; height: 40px; background: linear-gradient(180deg, #e74c3c, #c0392b); position: absolute; top: 0; left: -5px; border-radius: 5px 5px 0 0; z-index: 2; transform-origin: bottom; }
+.gift-body { width: 150px; height: 110px; background: linear-gradient(180deg, #e74c3c, #c0392b); position: absolute; bottom: 0; border-radius: 0 0 5px 5px; }
+.gift-ribbon-v { position: absolute; width: 20px; height: 100%; background: #ffd700; left: 50%; transform: translateX(-50%); z-index: 1; }
+.gift-ribbon-h { position: absolute; width: 100%; height: 20px; background: #ffd700; top: 50%; transform: translateY(-50%); z-index: 1; }
+.gift-bow { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); font-size: 2rem; z-index: 3; }
+@keyframes openLid { 0% { transform: rotateX(0); } 100% { transform: rotateX(-120deg) translateY(-20px); } }
+.gift-surprise { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 3rem; opacity: 0; transition: all 0.5s ease 0.3s; }
+.gift-box.opened .gift-surprise { opacity: 1; transform: translate(-50%, -80%); }
+.heart-burst { position: fixed; font-size: 30px; animation: heartBurst 1s ease-out forwards; pointer-events: none; z-index: 100; }
+@keyframes heartBurst { 0% { transform: scale(0); opacity: 1; } 50% { transform: scale(1.5); opacity: 1; } 100% { transform: scale(0) translateY(-100px); opacity: 0; } }
+.slider-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; max-width: 270px; margin: 20px auto; background: rgba(255,255,255,0.1); padding: 5px; border-radius: 10px; }
+.slider-tile { aspect-ratio: 1; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; cursor: pointer; transition: all 0.2s; border: 2px solid rgba(255,255,255,0.2); }
+.slider-tile:hover { transform: scale(1.05); }
+.slider-tile.empty { background: transparent; border: 2px dashed rgba(255,255,255,0.3); cursor: default; }
+.slider-tile.empty:hover { transform: none; }
+.music-control { position: fixed; top: 20px; right: 20px; z-index: 1000; background: rgba(255,255,255,0.2); backdrop-filter: blur(10px); border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.5rem; border: 2px solid rgba(255,255,255,0.3); transition: all 0.3s; }
+.music-control:hover { transform: scale(1.1); }
+.music-control.playing { animation: musicPulse 1s ease infinite; }
+@keyframes musicPulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(255,107,157,0.4); } 50% { box-shadow: 0 0 0 15px rgba(255,107,157,0); } }
+.emoji-rain { position: fixed; font-size: 25px; animation: emojiFall 3s linear forwards; pointer-events: none; z-index: 50; }
+@keyframes emojiFall { 0% { transform: translateY(-50px) rotate(0deg); opacity: 1; } 100% { transform: translateY(100vh) rotate(360deg); opacity: 0; } }
+.final-message { font-size: 1.2rem; line-height: 2; color: #ffe4e1; max-width: 500px; margin: 20px auto; }
+.final-message p { margin: 15px 0; padding: 15px; background: rgba(255,255,255,0.1); border-radius: 15px; border-left: 4px solid #ffd700; }
+.kiss-btn { width: 100px; height: 100px; border-radius: 50%; background: linear-gradient(135deg, #ff6b9d, #c44569); border: 4px solid #ffd700; font-size: 2.5rem; cursor: pointer; margin: 20px auto; display: flex; align-items: center; justify-content: center; transition: all 0.3s; animation: heartbeat 1.5s ease infinite; }
+.kiss-btn:hover { transform: scale(1.2); }
+@keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+.hidden-msg { background: linear-gradient(135deg, #2d3436, #636e72); padding: 20px; border-radius: 15px; margin: 15px 0; cursor: pointer; transition: all 0.5s; position: relative; overflow: hidden; }
+.hidden-msg::before { content: '👆 Click to Reveal Secret Message!'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 0.9rem; color: #b2bec3; white-space: nowrap; }
+.hidden-msg.revealed { background: linear-gradient(135deg, #ff6b9d, #c44569); }
+.hidden-msg.revealed::before { display: none; }
+.hidden-msg.revealed .msg-content { opacity: 1; }
+.msg-content { opacity: 0; transition: opacity 0.5s; font-style: italic; font-size: 1.1rem; }
+.countdown { display: flex; justify-content: center; gap: 15px; margin: 20px 0; flex-wrap: wrap; }
+.countdown-item { background: rgba(255,255,255,0.15); padding: 15px; border-radius: 15px; min-width: 70px; }
+.countdown-item .number { font-size: 2rem; font-weight: bold; color: #ffd700; }
+.countdown-item .label { font-size: 0.8rem; color: #ffe4e1; }
+.photo-frame { width: 200px; height: 200px; border-radius: 50%; border: 5px solid #ffd700; margin: 20px auto; background: linear-gradient(135deg, #ff6b9d, #c44569); display: flex; align-items: center; justify-content: center; font-size: 4rem; box-shadow: 0 0 30px rgba(255,215,0,0.5); animation: rotateFrame 10s linear infinite; }
+@keyframes rotateFrame { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+.photo-frame-inner { width: 180px; height: 180px; border-radius: 50%; background: linear-gradient(135deg, #667eea, #764ba2); display: flex; align-items: center; justify-content: center; animation: rotateFrame 10s linear infinite reverse; }
+.typing-text { overflow: hidden; border-right: 3px solid #ffd700; white-space: nowrap; animation: typing 3s steps(40) forwards, blink 0.75s step-end infinite; max-width: 100%; margin: 0 auto; }
+@keyframes typing { from { width: 0; } to { width: 100%; } }
+@keyframes blink { 50% { border-color: transparent; } }
+.song-info { background: rgba(255,255,255,0.1); padding: 10px 20px; border-radius: 20px; margin: 10px 0; font-size: 0.9rem; color: #ffd700; border: 1px solid rgba(255,215,0,0.3); }
+</style>
+<base target="_blank">
+</head>
+<body>
+<div id="hearts-container"></div>
+<div class="music-control" id="musicBtn" onclick="toggleMusic()">🎵</div>
+
+<div class="progress-container" id="progressContainer" style="display:none;">
+    <div class="progress-bar" id="progressBar"></div>
+    <div class="step-counter" id="stepCounter">Step 1 of 15</div>
+</div>
+
+<div class="container">
+
+<!-- STEP 0: Welcome -->
+<div class="step active" id="step0">
+    <div style="margin-top: 30%;">
+        <div style="font-size: 4rem; margin-bottom: 20px;">🎂💝</div>
+        <h1 class="title">Happy Birthday<br>My Love! 💕</h1>
+        <p style="font-size: 1.1rem; color: #ffe4e1; margin: 20px 0;">
+            Hey My Love! I have prepared something very special for you...<br>
+            A magical journey of 15 beautiful steps, just for YOU! 💖
+        </p>
+        <button class="btn" onclick="startJourney()">Start Our Journey 💫</button>
+        <p style="font-size: 0.85rem; color: #b2bec3; margin-top: 15px;">🔊 Turn up your volume for the best experience!</p>
+    </div>
+</div>
+
+<!-- STEP 1: Pop Balloons -->
+<div class="step" id="step1">
+    <h2 class="title">Step 1: Pop the Love Balloons! 🎈</h2>
+    <div class="song-info">🎵 Now Playing: Tum Hi Ho - Aashiqui 2</div>
+    <p style="margin-bottom: 15px; color: #ffe4e1;">Touch each balloon to pop it and reveal a secret!</p>
+    <div class="balloon-container" id="balloonContainer">
+        <div class="balloon balloon-red" onclick="popBalloon(this, 0)">💌</div>
+        <div class="balloon balloon-pink" onclick="popBalloon(this, 1)">💋</div>
+        <div class="balloon balloon-gold" onclick="popBalloon(this, 2)">🌹</div>
+        <div class="balloon balloon-purple" onclick="popBalloon(this, 3)">💖</div>
+        <div class="balloon balloon-blue" onclick="popBalloon(this, 4)">✨</div>
+    </div>
+    <div class="shayari-box" id="shayari1" style="display:none;">
+        <p class="shayari-text hindi">"तेरी मुस्कान में वो जादू है,<br>जो हर गम को भुला देता है...<br>तू मेरी जान है, मेरी पहचान है,<br>बस तुझसे ही तो मेरा दिल लगता है! 💕"</p>
+    </div>
+    <button class="btn" id="next1" style="display:none;" onclick="nextStep()">Next Step ➡️</button>
+</div>
+
+<!-- STEP 2: Scratch Card -->
+<div class="step" id="step2">
+    <h2 class="title">Step 2: Scratch to Reveal! ✨</h2>
+    <div class="song-info">🎵 Now Playing: Tera Ban Jaunga - Kabir Singh</div>
+    <p style="margin-bottom: 15px; color: #ffe4e1;">Scratch the card to see what I feel about you!</p>
+    <div class="scratch-container" onclick="scratchCard(this)">
+        <div class="scratch-reveal"><span style="font-size: 1rem; text-align: center; padding: 10px;">You are the MOST BEAUTIFUL thing that ever happened to me! 🌹</span></div>
+        <div class="scratch-hidden" id="scratch1">👆 Scratch Here!</div>
+    </div>
+    <div class="shayari-box" id="shayari2" style="display:none;">
+        <p class="shayari-text hindi">"जब से तुझे देखा है दिल,<br>बस तेरा ही नाम लेता है...<br>तू नहीं तो कुछ भी नहीं,<br>ये दिल तुझसे ही धड़कता है! ❤️"</p>
+    </div>
+    <button class="btn" id="next2" style="display:none;" onclick="nextStep()">Next Step ➡️</button>
+</div>
+
+<!-- STEP 3: Puzzle -->
+<div class="step" id="step3">
+    <h2 class="title">Step 3: Solve the Love Puzzle! 🧩</h2>
+    <div class="song-info">🎵 Now Playing: Raataan Lambiyan - Shershaah</div>
+    <p style="margin-bottom: 15px; color: #ffe4e1;">Click the pieces to reveal the hidden message!</p>
+    <div class="puzzle-container" id="puzzleContainer">
+        <div class="puzzle-piece" onclick="revealPuzzle(this, 0)">❓</div>
+        <div class="puzzle-piece" onclick="revealPuzzle(this, 1)">❓</div>
+        <div class="puzzle-piece" onclick="revealPuzzle(this, 2)">❓</div>
+        <div class="puzzle-piece" onclick="revealPuzzle(this, 3)">❓</div>
+        <div class="puzzle-piece" onclick="revealPuzzle(this, 4)">❓</div>
+        <div class="puzzle-piece" onclick="revealPuzzle(this, 5)">❓</div>
+        <div class="puzzle-piece" onclick="revealPuzzle(this, 6)">❓</div>
+        <div class="puzzle-piece" onclick="revealPuzzle(this, 7)">❓</div>
+        <div class="puzzle-piece" onclick="revealPuzzle(this, 8)">❓</div>
+    </div>
+    <div class="shayari-box" id="shayari3" style="display:none;">
+        <p class="shayari-text hindi">"तेरी आँखों में वो नूर है,<br>जिसमें मैं खो जाता हूँ...<br>तू मेरी दुआओं का असर है,<br>जिसे रोज़ मांगता हूँ! 🌟"</p>
+    </div>
+    <button class="btn" id="next3" style="display:none;" onclick="nextStep()">Next Step ➡️</button>
+</div>
+
+<!-- STEP 4: Spin Wheel -->
+<div class="step" id="step4">
+    <h2 class="title">Step 4: Spin the Wheel of Fortune! 🎯</h2>
+    <div class="song-info">🎵 Now Playing: Kesariya - Brahmastra</div>
+    <p style="margin-bottom: 15px; color: #ffe4e1;">Spin the wheel to see what destiny has for us!</p>
+    <div class="wheel-container">
+        <div class="wheel-pointer"></div>
+        <div class="wheel" id="wheel"><div class="wheel-center">💫</div></div>
+    </div>
+    <button class="btn btn-green" onclick="spinWheel()">Spin! 🎰</button>
+    <div class="shayari-box" id="shayari4" style="display:none;">
+        <p class="shayari-text hindi">"नसीब में तू लिखी है मेरी,<br>ये खुदा भी जानता है...<br>तुझसे मोहब्बत करना मेरी,<br>अब आदत बन गई है! 💫"</p>
+    </div>
+    <button class="btn" id="next4" style="display:none;" onclick="nextStep()">Next Step ➡️</button>
+</div>
+
+<!-- STEP 5: Open Gift -->
+<div class="step" id="step5">
+    <h2 class="title">Step 5: Open Your Special Gift! 🎁</h2>
+    <div class="song-info">🎵 Now Playing: Agar Tum Saath Ho - Tamasha</div>
+    <p style="margin-bottom: 15px; color: #ffe4e1;">Tap the gift box to open it!</p>
+    <div class="gift-box" id="giftBox" onclick="openGift()">
+        <div class="gift-lid"><div class="gift-ribbon-v"></div><div class="gift-ribbon-h"></div></div>
+        <div class="gift-body"><div class="gift-ribbon-v"></div><div class="gift-ribbon-h"></div></div>
+        <div class="gift-bow">🎀</div>
+        <div class="gift-surprise">💍💖</div>
+    </div>
+    <div class="shayari-box" id="shayari5" style="display:none;">
+        <p class="shayari-text hindi">"तू मेरी सबसे कीमती तोहफा है,<br>जो खुदा ने मुझे दिया है...<br>तुझसे बढ़कर कोई खुशी नहीं,<br>ये दिल तुझपर ही मरता है! 🎁"</p>
+    </div>
+    <button class="btn" id="next5" style="display:none;" onclick="nextStep()">Next Step ➡️</button>
+</div>
+
+<!-- STEP 6: Memory Game -->
+<div class="step" id="step6">
+    <h2 class="title">Step 6: Match Our Memories! 🧠</h2>
+    <div class="song-info">🎵 Now Playing: Tere Bina - Guru</div>
+    <p style="margin-bottom: 15px; color: #ffe4e1;">Find the matching pairs of our love symbols!</p>
+    <div class="memory-grid" id="memoryGrid"></div>
+    <div class="shayari-box" id="shayari6" style="display:none;">
+        <p class="shayari-text hindi">"हर पल तेरे साथ बिताया,<br>एक खूबसूरत याद बन गया...<br>तू मेरी ज़िंदगी का हिस्सा है,<br>जो अब मेरी सांस बन गया! 💭"</p>
+    </div>
+    <button class="btn" id="next6" style="display:none;" onclick="nextStep()">Next Step ➡️</button>
+</div>
+
+<!-- STEP 7: Hidden Messages -->
+<div class="step" id="step7">
+    <h2 class="title">Step 7: Reveal Secret Messages! 🔐</h2>
+    <div class="song-info">🎵 Now Playing: Janam Janam - Dilwale</div>
+    <p style="margin-bottom: 15px; color: #ffe4e1;">Click each box to reveal my secret feelings!</p>
+    <div class="hidden-msg" onclick="revealSecret(this)"><div class="msg-content">"You are the first thought in my morning and last before sleep" 💤</div></div>
+    <div class="hidden-msg" onclick="revealSecret(this)"><div class="msg-content">"Your smile is my favorite notification" 📱</div></div>
+    <div class="hidden-msg" onclick="revealSecret(this)"><div class="msg-content">"I fall for you more every single day" 🍂</div></div>
+    <div class="shayari-box" id="shayari7" style="display:none;">
+        <p class="shayari-text hindi">"तेरे बिना अधूरी सी लगती है,<br>हर सुबह, हर शाम मेरी...<br>तू मेरी हर घड़ी की खुशी है,<br>जो सबसे खास है, सबसे प्यारी! 🔐"</p>
+    </div>
+    <button class="btn" id="next7" style="display:none;" onclick="nextStep()">Next Step ➡️</button>
+</div>
+
+<!-- STEP 8: Blow Candles -->
+<div class="step" id="step8">
+    <h2 class="title">Step 8: Blow the Candles! 🕯️</h2>
+    <div class="song-info">🎵 Now Playing: Tum Se Hi - Jab We Met</div>
+    <p style="margin-bottom: 15px; color: #ffe4e1;">Tap each candle to blow it out and make a wish!</p>
+    <div class="cake-container">
+        <div class="cake"></div>
+        <div class="candle candle1" onclick="blowCandle(this)"></div>
+        <div class="candle candle2" onclick="blowCandle(this)"></div>
+        <div class="candle candle3" onclick="blowCandle(this)"></div>
+    </div>
+    <div class="shayari-box" id="shayari8" style="display:none;">
+        <p class="shayari-text hindi">"हर मुम्बत्ती के साथ एक ख्वाहिश,<br>हर ख्वाहिश में तेरा नाम...<br>तू मेरी सबसे बड़ी दुआ है,<br>जो हर साल मांगता हूँ! 🕯️"</p>
+    </div>
+    <button class="btn" id="next8" style="display:none;" onclick="nextStep()">Next Step ➡️</button>
+</div>
+
+<!-- STEP 9: Slider Puzzle -->
+<div class="step" id="step9">
+    <h2 class="title">Step 9: Arrange Our Love! 🧩</h2>
+    <div class="song-info">🎵 Now Playing: Pehla Nasha - Jo Jeeta Wohi Sikandar</div>
+    <p style="margin-bottom: 15px; color: #ffe4e1;">Arrange the tiles in order (1-8) to see the magic!</p>
+    <div class="slider-container" id="sliderContainer">
+        <div class="slider-tile" onclick="moveSlider(this)">1</div>
+        <div class="slider-tile" onclick="moveSlider(this)">2</div>
+        <div class="slider-tile" onclick="moveSlider(this)">3</div>
+        <div class="slider-tile" onclick="moveSlider(this)">4</div>
+        <div class="slider-tile" onclick="moveSlider(this)">5</div>
+        <div class="slider-tile" onclick="moveSlider(this)">6</div>
+        <div class="slider-tile" onclick="moveSlider(this)">7</div>
+        <div class="slider-tile" onclick="moveSlider(this)">8</div>
+        <div class="slider-tile empty" onclick="moveSlider(this)"></div>
+    </div>
+    <button class="btn btn-green" onclick="shuffleSlider()">Shuffle 🔄</button>
+    <div class="shayari-box" id="shayari9" style="display:none;">
+        <p class="shayari-text hindi">"जैसे पहेली सुलझती है धीरे-धीरे,<br>वैसे ही तू मेरी ज़िंदगी को सजाती है...<br>तू मेरी हर खुशी का जवाब है,<br>जो हर सवाल में बसाती है! 🧩"</p>
+    </div>
+    <button class="btn" id="next9" style="display:none;" onclick="nextStep()">Next Step ➡️</button>
+</div>
+
+<!-- STEP 10: Kiss Button -->
+<div class="step" id="step10">
+    <h2 class="title">Step 10: Send Me a Kiss! 💋</h2>
+    <div class="song-info">🎵 Now Playing: Mere Sohneya - Kabir Singh</div>
+    <p style="margin-bottom: 15px; color: #ffe4e1;">Tap the heart to send me virtual kisses!</p>
+    <div class="kiss-btn" id="kissBtn" onclick="sendKiss()">💋</div>
+    <p id="kissCount" style="font-size: 1.2rem; color: #ffd700;">Kisses sent: 0</p>
+    <div class="shayari-box" id="shayari10" style="display:none;">
+        <p class="shayari-text hindi">"तेरे होंठों की मिठास में खो जाऊँ,<br>तेरे प्यार में हमेशा रह जाऊँ...<br>तू मेरी जान है, मेरी पहचान है,<br>बस तुझसे ही तो मैं प्यार करता हूँ! 💋"</p>
+    </div>
+    <button class="btn" id="next10" style="display:none;" onclick="nextStep()">Next Step ➡️</button>
+</div>
+
+<!-- STEP 11: Emoji Rain -->
+<div class="step" id="step11">
+    <h2 class="title">Step 11: Catch the Love Rain! 🌧️</h2>
+    <div class="song-info">🎵 Now Playing: Baarish - Half Girlfriend</div>
+    <p style="margin-bottom: 15px; color: #ffe4e1;">Tap the falling emojis before they disappear! (Catch 10 to win)</p>
+    <div style="height: 300px; position: relative; background: rgba(255,255,255,0.05); border-radius: 20px; margin: 20px 0; overflow: hidden;" id="emojiRainArea">
+        <p style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #b2bec3;">Tap falling emojis! 👆</p>
+    </div>
+    <p id="emojiScore" style="font-size: 1.2rem; color: #ffd700;">Score: 0 / 10</p>
+    <div class="shayari-box" id="shayari11" style="display:none;">
+        <p class="shayari-text hindi">"जैसे बारिश की बूंदें गिरती हैं,<br>वैसे ही मेरा प्यार तुझपर बरसता है...<br>तू मेरी बारिश की वो बूंद है,<br>जो मेरी धरती को तरसाती है! 🌧️"</p>
+    </div>
+    <button class="btn" id="next11" style="display:none;" onclick="nextStep()">Next Step ➡️</button>
+</div>
+
+<!-- STEP 12: Countdown -->
+<div class="step" id="step12">
+    <h2 class="title">Step 12: Our Love Timer! ⏰</h2>
+    <div class="song-info">🎵 Now Playing: Tujh Mein Rab Dikhta Hai - Rab Ne Bana Di Jodi</div>
+    <p style="margin-bottom: 15px; color: #ffe4e1;">This timer shows how long I've loved you!</p>
+    <div class="countdown">
+        <div class="countdown-item"><div class="number" id="days">∞</div><div class="label">Days</div></div>
+        <div class="countdown-item"><div class="number" id="hours">∞</div><div class="label">Hours</div></div>
+        <div class="countdown-item"><div class="number" id="minutes">∞</div><div class="label">Minutes</div></div>
+        <div class="countdown-item"><div class="number" id="seconds">∞</div><div class="label">Seconds</div></div>
+    </div>
+    <p style="margin-top: 15px; color: #ffd700; font-size: 1.1rem;">...and counting! Since the day I met you! 💕</p>
+    <div class="shayari-box" id="shayari12" style="display:none;">
+        <p class="shayari-text hindi">"वक्त गुज़रता रहे, साल बदलते रहें,<br>मेरा प्यार तुझसे कभी कम न हो...<br>तू मेरी हर घड़ी की खुशी है,<br>तू मेरी हर पल की ज़रूरत है! ⏰"</p>
+    </div>
+    <button class="btn" id="next12" style="display:none;" onclick="nextStep()">Next Step ➡️</button>
+</div>
+
+<!-- STEP 13: Photo Frame -->
+<div class="step" id="step13">
+    <h2 class="title">Step 13: You Are My World! 🌍</h2>
+    <div class="song-info">🎵 Now Playing: Chaiyya Chaiyya - Dil Se</div>
+    <p style="margin-bottom: 15px; color: #ffe4e1;">This spinning frame represents my world revolving around you!</p>
+    <div class="photo-frame"><div class="photo-frame-inner">👑💖</div></div>
+    <p style="margin-top: 15px; color: #ffd700; font-size: 1rem;">✨ Watch the magic... ✨</p>
+    <div class="shayari-box" id="shayari13" style="display:none;">
+        <p class="shayari-text hindi">"तू मेरी दुनिया का केंद्र है,<br>जिसके इर्द-गिर्द मेरी सांसें चलती हैं...<br>तू मेरी रानी, मेरी जान है,<br>जिसके लिए ये दिल धड़कता है! 👑"</p>
+    </div>
+    <button class="btn" id="next13" style="display:none;" onclick="nextStep()">Next Step ➡️</button>
+</div>
+
+<!-- STEP 14: Typing Message -->
+<div class="step" id="step14">
+    <h2 class="title">Step 14: A Message From My Heart! 💌</h2>
+    <div class="song-info">🎵 Now Playing: Kal Ho Naa Ho - Title Track</div>
+    <p style="margin-bottom: 15px; color: #ffe4e1;">Watch as my heart types out its feelings for you...</p>
+    <div style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 20px; margin: 20px 0; min-height: 150px;">
+        <p class="typing-text" id="typingText" style="font-size: 1.1rem; color: #ffe4e1; line-height: 1.8;"></p>
+    </div>
+    <div class="shayari-box" id="shayari14" style="display:none;">
+        <p class="shayari-text hindi">"लफ्ज़ कम पड़ जाते हैं,<br>जब तेरे प्यार को बयां करूँ...<br>बस इतना जान ले मेरी जान,<br>तू मेरी हर सांस में बसती है! 💌"</p>
+    </div>
+    <button class="btn" id="next14" style="display:none;" onclick="nextStep()">Final Step! 🎉</button>
+</div>
+
+<!-- STEP 15: GRAND FINALE -->
+<div class="step" id="step15">
+    <div style="margin-top: 20px;">
+        <div style="font-size: 5rem; animation: bounce 1s ease infinite;">🎂🎉🎊</div>
+        <h1 class="grand-title">Happy Birthday<br>My Beautiful Tina! 💕</h1>
+        <div class="song-info">🎵 Now Playing: Perfect - Ed Sheeran</div>
+        <div class="final-message">
+            <p>🌹 <strong>My Dearest Pragya (Tina),</strong></p>
+            <p>On this special day, I want you to know that you are the most precious gift in my life. Every moment with you feels like a beautiful dream I never want to wake up from.</p>
+            <p>You are my sunshine on cloudy days, my strength when I'm weak, and my home no matter where I am. I am so blessed to have you, my Tina.</p>
+            <p>I dream of our future together - a home filled with laughter, little feet running around, and growing old together while holding hands. I want to build a life where every morning starts with your smile and every night ends with you in my arms.</p>
+            <p>You are not just my present, you are my forever. I promise to love you more with each passing day, to stand by you in every storm, and to celebrate every joy with you.</p>
+            <p style="font-size: 1.3rem; color: #ffd700; text-align: center; border: 2px solid #ffd700;">🎂 <strong>Happy Birthday, My Queen Pragya!</strong> 👑<br>May all your dreams come true! 💫</p>
+            <p style="text-align: right; color: #ff6b9d;">Forever Yours,<br><strong>Your Love 💕</strong></p>
+        </div>
+        <div style="margin: 30px 0;">
+            <button class="btn btn-gold" onclick="startFireworks()">🎆 Launch Fireworks!</button>
+            <button class="btn" onclick="createConfetti()">🎊 More Confetti!</button>
+        </div>
+        <div style="margin-top: 20px; padding: 20px; background: rgba(255,255,255,0.1); border-radius: 20px;">
+            <p style="font-size: 1.5rem; color: #ffd700; font-family: 'Dancing Script', cursive;">I Love You To The Moon And Back, My Tina! 🌙💕</p>
+        </div>
+    </div>
+</div>
+
+</div>
+
+<audio id="bgMusic" loop></audio>
+<audio id="stepMusic"></audio>
+
+<script>
+let currentStep = 0;
+const totalSteps = 15;
+let musicEnabled = false;
+
+const songs = [
+    "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+    "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+    "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
+    "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3",
+    "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3"
+];
+
+function createHearts() {
+    const container = document.getElementById('hearts-container');
+    const hearts = ['💕', '💖', '💗', '💓', '💝', '❤️', '😍', '🥰'];
+    setInterval(() => {
+        const heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = (3 + Math.random() * 3) + 's';
+        heart.style.fontSize = (15 + Math.random() * 20) + 'px';
+        container.appendChild(heart);
+        setTimeout(() => heart.remove(), 6000);
+    }, 800);
+}
+createHearts();
+
+function toggleMusic() {
+    const btn = document.getElementById('musicBtn');
+    const bgMusic = document.getElementById('bgMusic');
+    if (!musicEnabled) {
+        musicEnabled = true;
+        btn.classList.add('playing');
+        btn.textContent = '🔊';
+        playRandomSong();
+    } else {
+        musicEnabled = false;
+        btn.classList.remove('playing');
+        btn.textContent = '🔇';
+        bgMusic.pause();
+    }
+}
+
+function playRandomSong() {
+    if (!musicEnabled) return;
+    const bgMusic = document.getElementById('bgMusic');
+    const randomSong = songs[Math.floor(Math.random() * songs.length)];
+    bgMusic.src = randomSong;
+    bgMusic.volume = 0.3;
+    bgMusic.play().catch(e => console.log('Audio play failed:', e));
+}
+
+function playStepSound() {
+    if (!musicEnabled) return;
+    const stepMusic = document.getElementById('stepMusic');
+    const randomSong = songs[Math.floor(Math.random() * songs.length)];
+    stepMusic.src = randomSong;
+    stepMusic.volume = 0.2;
+    stepMusic.play().catch(e => {});
+}
+
+function startJourney() {
+    document.getElementById('progressContainer').style.display = 'block';
+    nextStep();
+}
+
+function nextStep() {
+    document.getElementById('step' + currentStep).classList.remove('active');
+    currentStep++;
+    if (currentStep <= totalSteps) {
+        document.getElementById('step' + currentStep).classList.add('active');
+        updateProgress();
+        playStepSound();
+        if (currentStep === 6) initMemoryGame();
+        if (currentStep === 9) initSlider();
+        if (currentStep === 11) startEmojiRain();
+        if (currentStep === 12) startCountdown();
+        if (currentStep === 14) startTyping();
+        if (currentStep === 13) {
+            setTimeout(() => {
+                document.getElementById('shayari13').style.display = 'block';
+                document.getElementById('next13').style.display = 'inline-block';
+            }, 3000);
+        }
+        if (currentStep === 15) startFireworks();
+    }
+}
+
+function updateProgress() {
+    const percent = (currentStep / totalSteps) * 100;
+    document.getElementById('progressBar').style.width = percent + '%';
+    document.getElementById('stepCounter').textContent = 'Step ' + currentStep + ' of ' + totalSteps;
+}
+
+let poppedCount = 0;
+function popBalloon(balloon, index) {
+    if (balloon.classList.contains('popped')) return;
+    balloon.classList.add('popped');
+    balloon.textContent = '💥';
+    poppedCount++;
+    for (let i = 0; i < 5; i++) {
+        setTimeout(() => createHeartBurst(balloon), i * 100);
+    }
+    if (poppedCount >= 5) {
+        document.getElementById('shayari1').style.display = 'block';
+        document.getElementById('next1').style.display = 'inline-block';
+    }
+}
+
+function createHeartBurst(element) {
+    const heart = document.createElement('div');
+    heart.className = 'heart-burst';
+    heart.textContent = ['💕', '💖', '💗'][Math.floor(Math.random() * 3)];
+    const rect = element.getBoundingClientRect();
+    heart.style.left = (rect.left + rect.width/2) + 'px';
+    heart.style.top = rect.top + 'px';
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 1000);
+}
+
+function scratchCard(container) {
+    const hidden = container.querySelector('.scratch-hidden');
+    hidden.classList.add('scratched');
+    document.getElementById('shayari2').style.display = 'block';
+    document.getElementById('next2').style.display = 'inline-block';
+    createConfetti();
+}
+
+let puzzleRevealed = 0;
+const puzzleEmojis = ['I', '❤️', 'Y', 'O', 'U', '💕', 'T', 'I', 'N'];
+function revealPuzzle(piece, index) {
+    if (piece.classList.contains('revealed')) return;
+    piece.classList.add('revealed');
+    piece.textContent = puzzleEmojis[index];
+    puzzleRevealed++;
+    if (puzzleRevealed >= 9) {
+        document.getElementById('shayari3').style.display = 'block';
+        document.getElementById('next3').style.display = 'inline-block';
+    }
+}
+
+function spinWheel() {
+    const wheel = document.getElementById('wheel');
+    const rotations = 5 + Math.random() * 5;
+    const degrees = rotations * 360 + Math.random() * 360;
+    wheel.style.transform = 'rotate(' + degrees + 'deg)';
+    setTimeout(() => {
+        document.getElementById('shayari4').style.display = 'block';
+        document.getElementById('next4').style.display = 'inline-block';
+        createConfetti();
+    }, 3000);
+}
+
+function openGift() {
+    const gift = document.getElementById('giftBox');
+    gift.classList.add('opened');
+    setTimeout(() => {
+        document.getElementById('shayari5').style.display = 'block';
+        document.getElementById('next5').style.display = 'inline-block';
+        createConfetti();
+    }, 800);
+}
+
+let memoryCards = [];
+let flippedCards = [];
+let matchedPairs = 0;
+function initMemoryGame() {
+    const grid = document.getElementById('memoryGrid');
+    grid.innerHTML = '';
+    const emojis = ['💕', '💖', '💗', '💝', '💕', '💖', '💗', '💝'];
+    for (let i = emojis.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [emojis[i], emojis[j]] = [emojis[j], emojis[i]];
+    }
+    emojis.forEach((emoji, index) => {
+        const card = document.createElement('div');
+        card.className = 'memory-card';
+        card.dataset.emoji = emoji;
+        card.dataset.index = index;
+        card.textContent = '❓';
+        card.onclick = () => flipCard(card);
+        grid.appendChild(card);
+    });
+}
+function flipCard(card) {
+    if (card.classList.contains('flipped') || card.classList.contains('matched') || flippedCards.length >= 2) return;
+    card.classList.add('flipped');
+    card.textContent = card.dataset.emoji;
+    flippedCards.push(card);
+    if (flippedCards.length === 2) {
+        setTimeout(() => checkMatch(), 600);
+    }
+}
+function checkMatch() {
+    const [card1, card2] = flippedCards;
+    if (card1.dataset.emoji === card2.dataset.emoji) {
+        card1.classList.add('matched');
+        card2.classList.add('matched');
+        matchedPairs++;
+        if (matchedPairs >= 4) {
+            document.getElementById('shayari6').style.display = 'block';
+            document.getElementById('next6').style.display = 'inline-block';
+            createConfetti();
+        }
+    } else {
+        card1.classList.remove('flipped');
+        card2.classList.remove('flipped');
+        card1.textContent = '❓';
+        card2.textContent = '❓';
+    }
+    flippedCards = [];
+}
+
+let secretsRevealed = 0;
+function revealSecret(element) {
+    if (element.classList.contains('revealed')) return;
+    element.classList.add('revealed');
+    secretsRevealed++;
+    if (secretsRevealed >= 3) {
+        document.getElementById('shayari7').style.display = 'block';
+        document.getElementById('next7').style.display = 'inline-block';
+    }
+}
+
+let candlesBlown = 0;
+function blowCandle(candle) {
+    if (candle.classList.contains('blown')) return;
+    candle.classList.add('blown');
+    candlesBlown++;
+    if (candlesBlown >= 3) {
+        document.getElementById('shayari8').style.display = 'block';
+        document.getElementById('next8').style.display = 'inline-block';
+        createConfetti();
+    }
+}
+
+function initSlider() {}
+function moveSlider(tile) {
+    if (tile.classList.contains('empty')) return;
+    const container = document.getElementById('sliderContainer');
+    const tiles = Array.from(container.children);
+    const tileIndex = tiles.indexOf(tile);
+    const emptyIndex = tiles.findIndex(t => t.classList.contains('empty'));
+    const row = Math.floor(tileIndex / 3);
+    const col = tileIndex % 3;
+    const emptyRow = Math.floor(emptyIndex / 3);
+    const emptyCol = emptyIndex % 3;
+    const isAdjacent = (Math.abs(row - emptyRow) + Math.abs(col - emptyCol)) === 1;
+    if (isAdjacent) {
+        const emptyTile = tiles[emptyIndex];
+        const temp = tile.textContent;
+        tile.textContent = '';
+        tile.classList.add('empty');
+        emptyTile.textContent = temp;
+        emptyTile.classList.remove('empty');
+        checkSliderWin();
+    }
+}
+function checkSliderWin() {
+    const container = document.getElementById('sliderContainer');
+    const tiles = Array.from(container.children);
+    let correct = 0;
+    for (let i = 0; i < 8; i++) {
+        if (tiles[i].textContent == (i + 1)) correct++;
+    }
+    if (correct === 8) {
+        document.getElementById('shayari9').style.display = 'block';
+        document.getElementById('next9').style.display = 'inline-block';
+        createConfetti();
+    }
+}
+function shuffleSlider() {
+    const container = document.getElementById('sliderContainer');
+    const tiles = Array.from(container.children);
+    for (let i = 0; i < 100; i++) {
+        const emptyIndex = tiles.findIndex(t => t.classList.contains('empty'));
+        const emptyRow = Math.floor(emptyIndex / 3);
+        const emptyCol = emptyIndex % 3;
+        const neighbors = [];
+        if (emptyRow > 0) neighbors.push(emptyIndex - 3);
+        if (emptyRow < 2) neighbors.push(emptyIndex + 3);
+        if (emptyCol > 0) neighbors.push(emptyIndex - 1);
+        if (emptyCol < 2) neighbors.push(emptyIndex + 1);
+        const randomNeighbor = neighbors[Math.floor(Math.random() * neighbors.length)];
+        const emptyTile = tiles[emptyIndex];
+        const neighborTile = tiles[randomNeighbor];
+        const temp = neighborTile.textContent;
+        neighborTile.textContent = '';
+        neighborTile.classList.add('empty');
+        emptyTile.textContent = temp;
+        emptyTile.classList.remove('empty');
+    }
+}
+
+let kissCount = 0;
+function sendKiss() {
+    kissCount++;
+    document.getElementById('kissCount').textContent = 'Kisses sent: ' + kissCount;
+    createHeartBurst(document.getElementById('kissBtn'));
+    if (kissCount >= 5) {
+        document.getElementById('shayari10').style.display = 'block';
+        document.getElementById('next10').style.display = 'inline-block';
+    }
+}
+
+let emojiScore = 0;
+let emojiRainInterval;
+let emojiAutoCompleteTimer;
+function startEmojiRain() {
+    const area = document.getElementById('emojiRainArea');
+    area.innerHTML = '';
+    area.style.position = 'relative';
+    area.style.height = '300px';
+    area.style.background = 'rgba(255,255,255,0.05)';
+    area.style.borderRadius = '20px';
+    area.style.margin = '20px 0';
+    area.style.overflow = 'hidden';
+    area.style.cursor = 'pointer';
+
+    const emojis = ['💕', '💖', '💗', '💝', '❤️', '😍', '🥰', '💋', '🌹', '✨'];
+
+    // Auto-complete after 8 seconds even if she doesn't tap
+    emojiAutoCompleteTimer = setTimeout(() => {
+        if (emojiScore < 10) {
+            emojiScore = 10;
+            document.getElementById('emojiScore').textContent = 'Score: ' + emojiScore + ' / 10';
+            clearInterval(emojiRainInterval);
+            document.getElementById('shayari11').style.display = 'block';
+            document.getElementById('next11').style.display = 'inline-block';
+            createConfetti();
+        }
+    }, 8000);
+
+    emojiRainInterval = setInterval(() => {
+        const emoji = document.createElement('div');
+        emoji.className = 'emoji-rain';
+        emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        emoji.style.position = 'absolute';
+        emoji.style.left = Math.random() * (area.offsetWidth - 30) + 'px';
+        emoji.style.top = '-30px';
+        emoji.style.fontSize = '30px';
+        emoji.style.cursor = 'pointer';
+        emoji.style.zIndex = '10';
+        emoji.style.userSelect = 'none';
+        emoji.style.animation = 'emojiFall ' + (2 + Math.random() * 2) + 's linear forwards';
+
+        // Click handler
+        emoji.addEventListener('click', function(e) {
+            e.stopPropagation();
+            emojiScore++;
+            document.getElementById('emojiScore').textContent = 'Score: ' + emojiScore + ' / 10';
+            emoji.style.transform = 'scale(1.5)';
+            emoji.style.opacity = '0';
+            emoji.style.transition = 'all 0.2s';
+            setTimeout(() => emoji.remove(), 200);
+
+            if (emojiScore >= 10) {
+                clearTimeout(emojiAutoCompleteTimer);
+                clearInterval(emojiRainInterval);
+                document.getElementById('shayari11').style.display = 'block';
+                document.getElementById('next11').style.display = 'inline-block';
+                createConfetti();
+            }
+        });
+
+        // Also allow tapping anywhere on the area
+        area.addEventListener('click', function(e) {
+            if (e.target === area) {
+                emojiScore++;
+                document.getElementById('emojiScore').textContent = 'Score: ' + emojiScore + ' / 10';
+                if (emojiScore >= 10) {
+                    clearTimeout(emojiAutoCompleteTimer);
+                    clearInterval(emojiRainInterval);
+                    document.getElementById('shayari11').style.display = 'block';
+                    document.getElementById('next11').style.display = 'inline-block';
+                    createConfetti();
+                }
+            }
+        });
+
+        area.appendChild(emoji);
+        setTimeout(() => { if(emoji.parentNode) emoji.remove(); }, 4000);
+    }, 600);
+}
+
+function startCountdown() {
+    // Our love started: 9 October 2025, 10:42 PM
+    const startDate = new Date('2025-10-09T22:42:00');
+    function update() {
+        const now = new Date();
+        const diff = now - startDate;
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+        document.getElementById('days').textContent = days;
+        document.getElementById('hours').textContent = hours;
+        document.getElementById('minutes').textContent = minutes;
+        document.getElementById('seconds').textContent = seconds;
+    }
+    update();
+    setInterval(update, 1000);
+    setTimeout(() => {
+        document.getElementById('shayari12').style.display = 'block';
+        document.getElementById('next12').style.display = 'inline-block';
+    }, 3000);
+}
+
+function startTyping() {
+    const text = "You are my everything. My heart beats only for you. Every day with you is a blessing. I love you more than words can express. Happy Birthday my love! 💕";
+    const element = document.getElementById('typingText');
+    let i = 0;
+    function type() {
+        if (i < text.length) {
+            element.textContent += text.charAt(i);
+            i++;
+            setTimeout(type, 50);
+        } else {
+            document.getElementById('shayari14').style.display = 'block';
+            document.getElementById('next14').style.display = 'inline-block';
+        }
+    }
+    type();
+}
+
+function startFireworks() {
+    for (let i = 0; i < 50; i++) {
+        setTimeout(() => createConfetti(), i * 50);
+    }
+}
+
+function createConfetti() {
+    const colors = ['#ff6b9d', '#ffd700', '#00b894', '#74b9ff', '#a29bfe', '#ff6b6b', '#feca57'];
+    for (let i = 0; i < 20; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+        confetti.style.animationDuration = (2 + Math.random() * 2) + 's';
+        document.body.appendChild(confetti);
+        setTimeout(() => confetti.remove(), 4000);
+    }
+}
+</script>
+</body>
+</html>
